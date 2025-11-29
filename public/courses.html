@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Browse our online courses for career development and personal growth">
+    <meta name="keywords" content="online courses, career development, workshops, learning, programming, coding">
+    <meta name="author" content="Infrontofus Team">
+    <link rel="icon" href="loader.jpg">
+    <link rel="stylesheet" href="main.css">
+    <title>Online Courses - Infrontofus</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <style>
+        /* Enhanced Courses Page Styles */
+        .courses-filter {
+            background: var(--gray);
+            padding: 40px 0;
+            margin-bottom: 40px;
+        }
+
+        .filter-options {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .filter-btn {
+            padding: 12px 24px;
+            background: var(--light);
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            color: var(--text);
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            background: #7D2AE8;
+            color: white;
+            border-color: #7D2AE8;
+            transform: translateY(-2px);
+        }
+
+        .search-box {
+            position: relative;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 14px 50px 14px 20px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: var(--light);
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: #7D2AE8;
+            box-shadow: 0 0 0 3px rgba(125, 42, 232, 0.1);
+        }
+
+        .search-box i {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .course-card {
+            background: var(--light);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-subtle);
+        }
+
+        .course-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .course-image {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .course-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .course-card:hover .course-image img {
+            transform: scale(1.05);
+        }
+
+        .course-level {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #7D2AE8;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .course-content {
+            padding: 24px;
+        }
+
+        .course-content h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+            color: var(--text);
+            line-height: 1.4;
+        }
+
+        .course-content p {
+            color: var(--text-light);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .course-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: var(--text-light);
+        }
+
+        .course-meta span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .course-meta i {
+            color: #7D2AE8;
+        }
+
+        .course-price {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .price {
+            font-size: 24px;
+            font-weight: 700;
+            color: #7D2AE8;
+        }
+
+        .original-price {
+            font-size: 16px;
+            color: var(--text-light);
+            text-decoration: line-through;
+            margin-left: 8px;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: #7D2AE8;
+            border: 2px solid #7D2AE8;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline:hover {
+            background: #7D2AE8;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .no-courses {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-light);
+        }
+
+        .no-courses i {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: var(--border);
+        }
+
+        /* CTA Section */
+        .cta {
+            background: linear-gradient(135deg, #7D2AE8, #9c4dff);
+            color: white;
+            text-align: center;
+            padding: 80px 0;
+            margin-top: 40px;
+        }
+
+        .cta-content h2 {
+            font-size: 36px;
+            margin-bottom: 16px;
+        }
+
+        .cta-content p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #7D2AE8;
+            border: none;
+            padding: 16px 32px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .courses-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .filter-options {
+                gap: 8px;
+            }
+
+            .filter-btn {
+                padding: 10px 16px;
+                font-size: 14px;
+            }
+
+            .course-content {
+                padding: 20px;
+            }
+
+            .course-content h3 {
+                font-size: 18px;
+            }
+
+            .cta-content h2 {
+                font-size: 28px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .course-price {
+                flex-direction: column;
+                gap: 12px;
+                align-items: flex-start;
+            }
+
+            .btn-outline {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img class="nav-img" src="logo_black2.png" alt="logo">
+                <h1 class="nav-heading">Infront<span class="accent">of</span>Us</h1>
+            </div>
+
+            <ul class="nav-links" id="nav-links">
+    <li><a class="nav-link" href="index.html">Home</a></li>
+    <li><a class="nav-link" href="about.html">About</a></li>
+    <li><a class="nav-link" href="courses.html">Courses</a></li>
+    <li><a class="nav-link" href="blog.html">Blog</a></li>
+    <li><a class="nav-link" href="contact.html">Contact</a></li>
+    
+    <!-- Shopping Cart -->
+    <li class="cart-icon">
+        <a href="#" class="nav-link" id="cartToggle">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-count" id="cartCount">0</span>
+        </a>
+    </li>
+    
+    <!-- User Profile (Visible when logged in) -->
+    <li class="user-profile" id="userProfile" style="display: none;">
+        <div class="user-avatar" id="userAvatar">U</div>
+        <span class="user-name" id="userName">User</span>
+        <div class="user-dropdown">
+            <a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+            <a href="my-courses.html"><i class="fas fa-book"></i> My Courses</a>
+            <a href="profile.html"><i class="fas fa-user"></i> Profile</a>
+            <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </div>
+    </li>
+    
+    <!-- Login Button (Visible when not logged in) -->
+    <li>
+        <a class="nav-link login-btn" href="#" id="loginBtn">Login</a>
+    </li>
+</ul>
+
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Our Courses</h1>
+            <p>Discover comprehensive programming courses designed to enhance your skills and advance your career in technology</p>
+        </div>
+    </section>
+
+    <!-- Courses Filter -->
+    <section class="courses-filter">
+        <div class="container">
+            <div class="filter-options">
+                <button class="filter-btn active" data-filter="all">All Courses</button>
+                <button class="filter-btn" data-filter="beginner">Beginner</button>
+                <button class="filter-btn" data-filter="intermediate">Intermediate</button>
+                <button class="filter-btn" data-filter="advanced">Advanced</button>
+            </div>
+            <div class="search-box">
+                <input type="text" id="courseSearch" placeholder="Search courses by name or technology...">
+                <i class="fas fa-search"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses Grid -->
+    <section class="courses-section">
+        <div class="container">
+            <div class="courses-grid" id="coursesGrid">
+                <!-- Course cards will be loaded here dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Start Your Programming Journey?</h2>
+                <p>Join thousands of students who have transformed their careers with our comprehensive courses</p>
+                <div class="cta-buttons">
+                    <a href="contact.html" class="btn btn-primary">Get Personalized Guidance</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="f_logo-removebg-preview.png" alt="Infrontofus Logo">
+                        <h3>Infront<span class="accent">of</span>Us</h3>
+                    </div>
+                    <p>Empowering students through career guidance, workshops, expos, and online courses.</p>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/_infront_of_us_" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="https://youtube.com/channel/UCE1tN8OMn5rxFYnO62WUf1A" target="_blank"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="courses.html">Courses</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Programs</h4>
+                    <ul>
+                        <li><a href="blog.html">Workshops</a></li>
+                        <li><a href="blog.html">Expos</a></li>
+                        <li><a href="courses.html">Online Courses</a></li>
+                        <li><a href="courses.html">Career Counseling</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contact Info</h4>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> 2/64 A, M.Rasampalayam(Post), Paramathi Velur(Taluk), Namakkal-637207</li>
+                        <li><i class="fas fa-phone"></i> +91 7708658035</li>
+                        <li><i class="fas fa-envelope"></i> infrontofus143@gmail.com</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Infront of Us Pvt. Ltd. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Shopping Cart Modal -->
+<div class="cart-overlay" id="cartOverlay"></div>
+<div class="cart-modal" id="cartModal">
+    <div class="cart-header">
+        <h3>Your Cart</h3>
+        <button class="close-cart" id="closeCart">&times;</button>
+    </div>
+    <div class="cart-items" id="cartItems">
+        <!-- Cart items will be loaded here -->
+    </div>
+    <div class="cart-footer">
+        <div class="cart-total">
+            <span>Total:</span>
+            <span>₹<span id="cartTotal">0</span></span>
+        </div>
+        <button class="btn btn-primary btn-full" id="checkoutBtn">Proceed to Checkout</button>
+    </div>
+</div>
+
+    <script src="main.js"></script>
+<script>
+    let courses = [];
+
+    // DOM references (will exist because script is at end of body)
+    const coursesGrid = document.getElementById('coursesGrid');
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const searchInput = document.getElementById('courseSearch');
+
+    // Fetch courses from Azure API
+    async function fetchCourses() {
+        try {
+            const res = await fetch(`${API_BASE}/api/courses`);
+            if (!res.ok) throw new Error("Failed to load courses");
+
+            courses = await res.json();
+            displayCourses(courses);
+        } catch (err) {
+            console.error(err);
+            coursesGrid.innerHTML = `
+                <div class="no-courses">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <h3>Unable to load courses</h3>
+                    <p>Please try again in a few minutes.</p>
+                </div>
+            `;
+        }
+    }
+
+    // Display Courses
+    function displayCourses(filteredCourses = courses) {
+        coursesGrid.innerHTML = '';
+        
+        if (!filteredCourses || filteredCourses.length === 0) {
+            coursesGrid.innerHTML = `
+                <div class="no-courses">
+                    <i class="fas fa-search"></i>
+                    <h3>No courses found</h3>
+                    <p>Try adjusting your search or filter criteria</p>
+                </div>
+            `;
+            return;
+        }
+        
+        filteredCourses.forEach(course => {
+            const courseCard = document.createElement('div');
+            courseCard.className = 'course-card';
+            courseCard.innerHTML = `
+                <div class="course-image">
+                    <img src="${course.image}" alt="${course.title}" 
+                         onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI2Y4ZjlmYSIvPjx0ZXh0IHg9IjIwMCIgeT0iMTAwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTgiIGZpbGw9IiM3RDJBRTgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5Db3Vyc2UgSW1hZ2U8L3RleHQ+PC9zdmc+'">
+                    <div class="course-level">${course.level}</div>
+                </div>
+                <div class="course-content">
+                    <h3>${course.title}</h3>
+                    <p>${course.description}</p>
+                    <div class="course-meta">
+                        <span><i class="far fa-clock"></i> ${course.duration}</span>
+                        <span><i class="far fa-user"></i> ${course.students}+ students</span>
+                        <span><i class="fas fa-star"></i> ${course.rating}</span>
+                    </div>
+                    <div class="course-price">
+                        <div>
+                            <span class="price">₹${course.price}</span>
+                            ${course.originalPrice ? `<span class="original-price">₹${course.originalPrice}</span>` : ''}
+                        </div>
+                        <a href="course-detail.html?id=${course.id}" class="btn btn-outline">View Course</a>
+                    </div>
+                </div>
+            `;
+            coursesGrid.appendChild(courseCard);
+        });
+    }
+
+    // Filter Courses
+    function filterCourses() {
+        const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
+        const searchTerm = searchInput.value.toLowerCase();
+        
+        let filteredCourses = courses;
+        
+        if (activeFilter !== 'all') {
+            filteredCourses = filteredCourses.filter(course => course.level === activeFilter);
+        }
+        
+        if (searchTerm) {
+            filteredCourses = filteredCourses.filter(course => 
+                course.title.toLowerCase().includes(searchTerm) || 
+                course.description.toLowerCase().includes(searchTerm) ||
+                course.level.toLowerCase().includes(searchTerm)
+            );
+        }
+        
+        displayCourses(filteredCourses);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        // Load courses from API
+        fetchCourses();
+
+        // Filter buttons
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                filterCourses();
+            });
+        });
+
+        // Search
+        if (searchInput) {
+            searchInput.addEventListener('input', filterCourses);
+        }
+        
+        // Navbar/login/cart behavior is handled globally in main.js
+    });
+</script>
+
+</body>
+</html>

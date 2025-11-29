@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Learn about Infrontofus - Our mission, vision, and team">
+    <meta name="keywords" content="about us, mission, vision, team, career guidance">
+    <meta name="author" content="Infrontofus Team">
+    <link rel="icon" href="loader.jpg">
+    <link rel="stylesheet" href="main.css">
+    <title>About Us - Infrontofus</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+    /* Additional CSS for the new sliders */
+    .slider-section {
+        margin: 60px 0;
+    }
+
+    .slider-container {
+        position: relative;
+        overflow: hidden;
+        margin-top: 16px;
+        border-radius: 14px;
+        max-width: 1200px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .slider-track {
+        display: flex;
+        transition: transform 0.6s cubic-bezier(.2, .9, .2, 1);
+    }
+
+    .slider-slide {
+        min-width: 100%;
+        opacity: 0;
+        transition: opacity 0.4s ease;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .slider-slide.active {
+        opacity: 1;
+    }
+
+    /* Workshop Images (16:9 Landscape) */
+    #workshop-slider .slider-slide img {
+        width: 100%;
+        height: 500px;
+        object-fit: cover;
+        border-radius: 14px;
+    }
+
+    /* Expo Images (9:16 Portrait) */
+    #expo-slider .slider-slide {
+        background: #f8f9fa;
+        padding: 20px;
+    }
+
+    #expo-slider .slider-slide img {
+        width: auto;
+        max-width: 100%;
+        height: 500px;
+        object-fit: contain;
+        border-radius: 14px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .slide-caption {
+        position: absolute;
+        bottom: 12px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(15, 23, 42, 0.7);
+        color: #ffffff;
+        padding: 6px 14px;
+        border-radius: 999px;
+        font-size: 13px;
+        backdrop-filter: blur(4px);
+        white-space: nowrap;
+    }
+
+    .slider-arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 22px;
+        background: rgba(255, 255, 255, 0.825);
+        color: #7D2AE8;
+        border: none;
+        cursor: pointer;
+        padding: 4px 10px;
+        border-radius: 999px;
+        z-index: 10;
+        transition: background 0.3s ease;
+    }
+
+    .slider-arrow:hover {
+        background: rgba(15, 23, 42, 0.16);
+    }
+
+    .slider-prev {
+        left: 10px;
+    }
+
+    .slider-next {
+        right: 10px;
+    }
+
+    .slider-dots {
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    .slider-dots button {
+        width: 9px;
+        height: 9px;
+        border-radius: 999px;
+        border: none;
+        margin: 0 3px;
+        background: rgba(15, 23, 42, 0.18);
+        cursor: pointer;
+        transition: background 0.3s ease;
+    }
+
+    .slider-dots button.active {
+        background: #7D2AE8;
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+        /* Workshop Images on Mobile */
+        #workshop-slider .slider-slide img {
+            height: 300px;
+        }
+
+        /* Expo Images on Mobile */
+        #expo-slider .slider-slide {
+            padding: 10px;
+        }
+
+        #expo-slider .slider-slide img {
+            height: 400px;
+            max-width: 95%;
+        }
+
+        .slider-arrow {
+            font-size: 18px;
+            padding: 3px 8px;
+        }
+
+        .slide-caption {
+            font-size: 12px;
+            padding: 4px 10px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        /* Workshop Images on Small Mobile */
+        #workshop-slider .slider-slide img {
+            height: 250px;
+        }
+
+        /* Expo Images on Small Mobile */
+        #expo-slider .slider-slide img {
+            height: 350px;
+        }
+
+        .slider-arrow {
+            font-size: 16px;
+            padding: 2px 6px;
+        }
+
+        .slider-prev {
+            left: 5px;
+        }
+
+        .slider-next {
+            right: 5px;
+        }
+    }
+
+    /* For very tall expo images on desktop */
+    @media (min-width: 1024px) {
+        #expo-slider .slider-slide img {
+            height: 550px;
+        }
+    }
+</style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img class="nav-img" src="logo_black2.png" alt="logo">
+                <h1 class="nav-heading">Infront<span class="accent">of</span>Us</h1>
+            </div>
+
+            <ul class="nav-links" id="nav-links">
+    <li><a class="nav-link" href="index.html">Home</a></li>
+    <li><a class="nav-link" href="about.html">About</a></li>
+    <li><a class="nav-link" href="courses.html">Courses</a></li>
+    <li><a class="nav-link" href="blog.html">Blog</a></li>
+    <li><a class="nav-link" href="contact.html">Contact</a></li>
+    
+    <!-- Shopping Cart -->
+    <li class="cart-icon">
+        <a href="#" class="nav-link" id="cartToggle">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-count" id="cartCount">0</span>
+        </a>
+    </li>
+    
+    <!-- User Profile (Visible when logged in) -->
+    <li class="user-profile" id="userProfile" style="display: none;">
+        <div class="user-avatar" id="userAvatar">U</div>
+        <span class="user-name" id="userName">User</span>
+        <div class="user-dropdown">
+            <a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+            <a href="my-courses.html"><i class="fas fa-book"></i> My Courses</a>
+            <a href="profile.html"><i class="fas fa-user"></i> Profile</a>
+            <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </div>
+    </li>
+    
+    <!-- Login Button (Visible when not logged in) -->
+    <li>
+        <a class="nav-link login-btn" href="#" id="loginBtn">Login</a>
+    </li>
+</ul>
+
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>About Infrontofus</h1>
+            <p>Empowering students through innovative career guidance and educational experiences</p>
+        </div>
+    </section>
+
+    <!-- About Content -->
+    <section class="about-content">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-text">
+                    <h2>Our Story</h2>
+                    <p>Infrontofus was founded with a vision to bridge the gap between traditional education and real-world career requirements. We recognized that students often struggle to find the right career path due to lack of proper guidance and exposure.</p>
+                    
+                    <p>Our journey began with conducting workshops and expos in schools, helping students discover their potential and explore various career options. Over time, we expanded our offerings to include online courses, making quality career guidance accessible to students across the country.</p>
+
+                    <div class="mission-vision">
+                        <div class="mv-card">
+                            <div class="mv-icon">
+                                <i class="fas fa-bullseye"></i>
+                            </div>
+                            <h3>Our Mission</h3>
+                            <p>To empower students with the knowledge, skills, and confidence needed to make informed career decisions and achieve professional success.</p>
+                        </div>
+                        <div class="mv-card">
+                            <div class="mv-icon">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                            <h3>Our Vision</h3>
+                            <p>To become the leading career guidance platform that transforms how students approach their education and career planning.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Workshop Gallery Section -->
+    <section class="slider-section">
+        <div class="container">
+            <div class="section-title">
+                <h3>Career Guidance Workshops</h3>
+                <p class="muted">Interactive sessions helping students discover their career paths</p>
+            </div>
+
+            <div class="slider-container" id="workshop-slider">
+                <div class="slider-track">
+                    <div class="slider-slide active">
+                        <img src="CG1.jpg" alt="Career Guidance Workshop Session 1">
+                        <p class="slide-caption">Career Assessment Session</p>
+                    </div>
+                    <div class="slider-slide">
+                        <img src="CG2.jpg" alt="Career Guidance Workshop Session 2">
+                        <p class="slide-caption">One-on-One Counseling</p>
+                    </div>
+                    <div class="slider-slide">
+                        <img src="CG3.jpg" alt="Career Guidance Workshop Session 3">
+                        <p class="slide-caption">Group Discussion Activity</p>
+                    </div>
+                    <div class="slider-slide">
+                        <img src="CG4.jpg" alt="Career Guidance Workshop Session 4">
+                        <p class="slide-caption">Career Roadmap Planning</p>
+                    </div>
+                </div>
+
+                <!-- Arrows -->
+                <button class="slider-arrow slider-prev" aria-label="Previous image">❮</button>
+                <button class="slider-arrow slider-next" aria-label="Next image">❯</button>
+
+                <!-- Dots -->
+                <div class="slider-dots" id="workshop-dots"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="values">
+        <div class="container">
+            <h2 class="section-title">Our Values</h2>
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Excellence</h3>
+                    <p>We strive for excellence in all our programs and services, ensuring the highest quality education.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Collaboration</h3>
+                    <p>We believe in the power of collaboration between students, educators, and industry experts.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3>Innovation</h3>
+                    <p>We continuously innovate our approaches to meet the evolving needs of students and the job market.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Empathy</h3>
+                    <p>We understand the challenges students face and provide personalized support and guidance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team">
+        <div class="container">
+            <h2 class="section-title">Our Team</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="team1.jpg" alt="Team Member">
+                    </div>
+                    <h3>Aravind R</h3>
+                    <p class="member-role">President</p>
+                    <p>Specialized in conducting interactive learning sessions for students.</p>
+                </div>
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="team2.jpg" alt="Team Member">
+                    </div>
+                    <h3>Harini P</h3>
+                    <p class="member-role">Vice President</p>
+                    <p>Specialized in conducting interactive learning sessions for students.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Science Expo Gallery Section -->
+    <section class="slider-section">
+        <div class="container">
+            <div class="section-title">
+                <h3>Science Expo Events</h3>
+                <p class="muted">Showcasing student innovations and scientific projects</p>
+            </div>
+
+            <div class="slider-container" id="expo-slider">
+                <div class="slider-track">
+                    <div class="slider-slide active">
+                        <img src="ex1.jpg" alt="Science Expo Event 1">
+                        <p class="slide-caption">Student Project Showcase</p>
+                    </div>
+                    <div class="slider-slide">
+                        <img src="ex2.jpg" alt="Science Expo Event 2">
+                        <p class="slide-caption">Innovation Display</p>
+                    </div>
+                    <div class="slider-slide">
+                        <img src="ex3.jpg" alt="Science Expo Event 3">
+                        <p class="slide-caption">Interactive Demonstrations</p>
+                    </div>
+                    <div class="slider-slide">
+                        <img src="ex4.jpg" alt="Science Expo Event 4">
+                        <p class="slide-caption">Expert Judging Session</p>
+                    </div>
+                    <div class="slider-slide">
+                        <img src="ex5.jpg" alt="Science Expo Event 5">
+                        <p class="slide-caption">Award Ceremony</p>
+                    </div>
+                </div>
+
+                <!-- Arrows -->
+                <button class="slider-arrow slider-prev" aria-label="Previous image">❮</button>
+                <button class="slider-arrow slider-next" aria-label="Next image">❯</button>
+
+                <!-- Dots -->
+                <div class="slider-dots" id="expo-dots"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievements Section -->
+    <section class="achievements">
+        <div class="container">
+            <h2 class="section-title">Our Achievements</h2>
+            <div class="achievements-grid">
+                <div class="achievement-card">
+                    <img src="achivement1.png" alt="Achievement 1">
+                    <h3>Best Career Guidance Platform 2024</h3>
+                    <p>Recognized for excellence in student career development</p>
+                </div>
+                <div class="achievement-card">
+                    <img src="achievement2.jpg" alt="Achievement 2">
+                    <h3>Educational Innovation Award</h3>
+                    <p>Awarded for innovative approaches to career counseling</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="f_logo-removebg-preview.png" alt="Infrontofus Logo">
+                        <h3>Infront<span class="accent">of</span>Us</h3>
+                    </div>
+                    <p>Empowering students through career guidance, workshops, expos, and online courses.</p>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/_infront_of_us_" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="https://youtube.com/channel/UCE1tN8OMn5rxFYnO62WUf1A" target="_blank"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="courses.html">Courses</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Programs</h4>
+                    <ul>
+                        <li><a href="blog.html">Workshops</a></li>
+                        <li><a href="blog.html">Expos</a></li>
+                        <li><a href="courses.html">Online Courses</a></li>
+                        <li><a href="courses.html">Career Counseling</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contact Info</h4>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> 2/64 A, M.Rasampalayam(Post), Paramathi Velur(Taluk), Namakkal-637207</li>
+                        <li><i class="fas fa-phone"></i> +91 7708658035</li>
+                        <li><i class="fas fa-envelope"></i> infrontofus143@gmail.com</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Infront of Us Pvt. Ltd. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Shopping Cart Modal -->
+<div class="cart-overlay" id="cartOverlay"></div>
+<div class="cart-modal" id="cartModal">
+    <div class="cart-header">
+        <h3>Your Cart</h3>
+        <button class="close-cart" id="closeCart">&times;</button>
+    </div>
+    <div class="cart-items" id="cartItems">
+        <!-- Cart items will be loaded here -->
+    </div>
+    <div class="cart-footer">
+        <div class="cart-total">
+            <span>Total:</span>
+            <span>₹<span id="cartTotal">0</span></span>
+        </div>
+        <button class="btn btn-primary btn-full" id="checkoutBtn">Proceed to Checkout</button>
+    </div>
+</div>
+
+    <script>
+        // ===== WORKSHOP SLIDER =====
+        function initializeSlider(sliderId, dotsId) {
+            const slider = document.getElementById(sliderId);
+            const track = slider.querySelector('.slider-track');
+            const slides = slider.querySelectorAll('.slider-slide');
+            const prevBtn = slider.querySelector('.slider-prev');
+            const nextBtn = slider.querySelector('.slider-next');
+            const dotsContainer = document.getElementById(dotsId);
+            
+            let currentIndex = 0;
+
+            // Create dots
+            slides.forEach((_, i) => {
+                const dot = document.createElement("button");
+                dot.setAttribute('type', 'button');
+                if (i === 0) dot.classList.add("active");
+                dotsContainer.appendChild(dot);
+            });
+
+            const dots = dotsContainer.querySelectorAll("button");
+
+            function showSlide(index) {
+                currentIndex = (index + slides.length) % slides.length;
+                
+                // Update slides
+                slides.forEach(slide => slide.classList.remove("active"));
+                slides[currentIndex].classList.add("active");
+                
+                // Update track position
+                track.style.transform = `translateX(-${currentIndex * 100}%)`;
+                
+                // Update dots
+                dots.forEach(dot => dot.classList.remove("active"));
+                dots[currentIndex].classList.add("active");
+            }
+
+            // Event listeners
+            prevBtn.addEventListener('click', () => showSlide(currentIndex - 1));
+            nextBtn.addEventListener('click', () => showSlide(currentIndex + 1));
+
+            dots.forEach((dot, i) => {
+                dot.addEventListener('click', () => showSlide(i));
+            });
+
+            // Auto-advance slides
+            let slideInterval = setInterval(() => showSlide(currentIndex + 1), 4000);
+
+            // Pause on hover
+            slider.addEventListener('mouseenter', () => clearInterval(slideInterval));
+            slider.addEventListener('mouseleave', () => {
+                slideInterval = setInterval(() => showSlide(currentIndex + 1), 4000);
+            });
+
+            return { showSlide, currentIndex };
+        }
+
+        // Initialize both sliders when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Workshop Slider (4 images)
+            initializeSlider('workshop-slider', 'workshop-dots');
+            
+            // Expo Slider (5 images)
+            initializeSlider('expo-slider', 'expo-dots');
+
+            // Mobile menu functionality
+            const hamburger = document.getElementById('hamburger');
+            const navLinks = document.getElementById('nav-links');
+            
+            if (hamburger) {
+                hamburger.addEventListener('click', function() {
+                    navLinks.classList.toggle('active');
+                    hamburger.classList.toggle('active');
+                });
+            }
+
+            // Login modal functionality
+            const loginBtn = document.getElementById('loginBtn');
+            const loginModal = document.getElementById('loginModal');
+            const closeModal = document.querySelector('.close-modal');
+            const showRegister = document.getElementById('showRegister');
+            const showLogin = document.getElementById('showLogin');
+            const loginForm = document.getElementById('loginForm');
+            const registerForm = document.getElementById('registerForm');
+
+            if (loginBtn) {
+                loginBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    loginModal.style.display = 'block';
+                });
+            }
+
+            if (closeModal) {
+                closeModal.addEventListener('click', function() {
+                    loginModal.style.display = 'none';
+                });
+            }
+
+            if (showRegister) {
+                showRegister.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    loginForm.style.display = 'none';
+                    registerForm.style.display = 'block';
+                });
+            }
+
+            if (showLogin) {
+                showLogin.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    registerForm.style.display = 'none';
+                    loginForm.style.display = 'block';
+                });
+            }
+
+            // Close modal when clicking outside
+            window.addEventListener('click', function(e) {
+                if (e.target === loginModal) {
+                    loginModal.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Infrontofus – Career development through expos, workshops & courses.">
+    <meta name="keywords" content="career guidance, workshops, expos, seminars, personal development, online courses">
+    <meta name="author" content="Infrontofus Team">
+    <link rel="icon" href="loader.jpg">
+    <link rel="stylesheet" href="styles.css">
+    <title>Infrontofus - Career Development & Online Courses</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Razorpay Integration -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img class="nav-img" src="logo_black2.png" alt="logo">
+                <h1 class="nav-heading">Infront<span class="accent">of</span>Us</h1>
+            </div>
+
+            <!-- Navigation Links -->
+            <ul class="nav-links" id="nav-links">
+    <li><a class="nav-link" href="index.html">Home</a></li>
+    <li><a class="nav-link" href="about.html">About</a></li>
+    <li><a class="nav-link" href="courses.html">Courses</a></li>
+    <li><a class="nav-link" href="blog.html">Blog</a></li>
+    <li><a class="nav-link" href="contact.html">Contact</a></li>
+    
+    <!-- Shopping Cart -->
+    <li class="cart-icon">
+        <a href="#" class="nav-link" id="cartToggle">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-count" id="cartCount">0</span>
+        </a>
+    </li>
+    
+    <!-- User Profile (Visible when logged in) -->
+    <li class="user-profile" id="userProfile" style="display: none;">
+        <div class="user-avatar" id="userAvatar">U</div>
+        <span class="user-name" id="userName">User</span>
+        <div class="user-dropdown">
+            <a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+            <a href="my-courses.html"><i class="fas fa-book"></i> My Courses</a>
+            <a href="profile.html"><i class="fas fa-user"></i> Profile</a>
+            <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </div>
+    </li>
+    
+    <!-- Login Button (Visible when not logged in) -->
+    <li>
+        <a class="nav-link login-btn" href="#" id="loginBtn">Login</a>
+    </li>
+</ul>
+
+            <!-- Hamburger Menu -->
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">Unlock Your <span class="accent">Potential</span></h1>
+                <p class="hero-subtitle">Professional excellence and personal growth through immersive learning experiences, workshops, and online courses.</p>
+                <div class="hero-buttons">
+                    <a href="courses.html" class="btn btn-primary">Explore Courses</a>
+                    <a href="about.html" class="btn btn-secondary">Learn More</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="cover1-removebg-preview.png" alt="Students learning">
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">What We Offer</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <h3>Workshops</h3>
+                    <p>Interactive sessions designed to provide hands-on learning experiences and practical skills.</p>
+                    <a href="blog.html" class="feature-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <h3>Expos</h3>
+                    <p>Showcasing innovations and connecting students with industry experts and opportunities.</p>
+                    <a href="blog.html" class="feature-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Online Courses</h3>
+                    <p>Comprehensive courses designed to help you master new skills at your own pace.</p>
+                    <a href="courses.html" class="feature-link">Browse Courses <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses Preview Section -->
+    <section class="courses-preview">
+        <div class="container">
+            <h2 class="section-title">Featured Courses</h2>
+            <p class="section-subtitle">Start your learning journey with our most popular courses</p>
+            
+            <div class="courses-grid">
+                <div class="course-card">
+                    <div class="course-image">
+                        <img src="course1.jpg" alt="Career Guidance Fundamentals">
+                        <div class="course-level">Beginner</div>
+                    </div>
+                    <div class="course-content">
+                        <h3>Career Guidance Fundamentals</h3>
+                        <p>Learn how to identify your strengths and choose the right career path.</p>
+                        <div class="course-meta">
+                            <span><i class="far fa-clock"></i> 4 weeks</span>
+                            <span><i class="far fa-user"></i> 120+ students</span>
+                        </div>
+                        <div class="course-price">
+                            <span class="price">₹999</span>
+                            <a href="courses.html" class="btn btn-outline">View Course</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="course-card">
+                    <div class="course-image">
+                        <img src="course2.jpg" alt="Effective Communication Skills">
+                        <div class="course-level">Intermediate</div>
+                    </div>
+                    <div class="course-content">
+                        <h3>Effective Communication Skills</h3>
+                        <p>Master the art of communication for personal and professional success.</p>
+                        <div class="course-meta">
+                            <span><i class="far fa-clock"></i> 6 weeks</span>
+                            <span><i class="far fa-user"></i> 85+ students</span>
+                        </div>
+                        <div class="course-price">
+                            <span class="price">₹1499</span>
+                            <a href="courses.html" class="btn btn-outline">View Course</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="course-card">
+                    <div class="course-image">
+                        <img src="course3.jpg" alt="Leadership Development">
+                        <div class="course-level">Advanced</div>
+                    </div>
+                    <div class="course-content">
+                        <h3>Leadership Development</h3>
+                        <p>Develop essential leadership skills to inspire and guide others effectively.</p>
+                        <div class="course-meta">
+                            <span><i class="far fa-clock"></i> 8 weeks</span>
+                            <span><i class="far fa-user"></i> 65+ students</span>
+                        </div>
+                        <div class="course-price">
+                            <span class="price">₹1999</span>
+                            <a href="courses.html" class="btn btn-outline">View Course</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center">
+                <a href="courses.html" class="btn btn-primary">View All Courses</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title">What Students Say</h2>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"The career guidance workshop helped me understand different career options and choose the right path for my future."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">A</div>
+                        <div class="author-info">
+                            <h4>Student of NKMHSS</h4>
+                            <span>Career Guidance Workshop</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"Our school counselor was very helpful in guiding me towards my interests and strengths. The expo was eye-opening!"</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">B</div>
+                        <div class="author-info">
+                            <h4>Student of NKMHSS</h4>
+                            <span>Science Expo Participant</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"The online course on communication skills transformed how I interact with others. Highly recommended!"</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">C</div>
+                        <div class="author-info">
+                            <h4>Online Student</h4>
+                            <span>Communication Skills Course</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Transform Your Career?</h2>
+                <p>Join thousands of students who have benefited from our workshops, expos, and online courses.</p>
+                <div class="cta-buttons">
+                    <a href="courses.html" class="btn btn-primary">Browse Courses</a>
+                    <a href="contact.html" class="btn btn-secondary">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="f_logo-removebg-preview.png" alt="Infrontofus Logo">
+                        <h3>Infront<span class="accent">of</span>Us</h3>
+                    </div>
+                    <p>Empowering students through career guidance, workshops, expos, and online courses.</p>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/_infront_of_us_" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="https://youtube.com/channel/UCE1tN8OMn5rxFYnO62WUf1A" target="_blank"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="courses.html">Courses</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Programs</h4>
+                    <ul>
+                        <li><a href="blog.html">Workshops</a></li>
+                        <li><a href="blog.html">Expos</a></li>
+                        <li><a href="courses.html">Online Courses</a></li>
+                        <li><a href="courses.html">Career Counseling</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contact Info</h4>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> 2/64 A, M.Rasampalayam(Post), Paramathi Velur(Taluk), Namakkal-637207</li>
+                        <li><i class="fas fa-phone"></i> +91 7708658035</li>
+                        <li><i class="fas fa-envelope"></i> infrontofus143@gmail.com</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Infront of Us Pvt. Ltd. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Shopping Cart Modal -->
+<div class="cart-overlay" id="cartOverlay"></div>
+<div class="cart-modal" id="cartModal">
+    <div class="cart-header">
+        <h3>Your Cart</h3>
+        <button class="close-cart" id="closeCart">&times;</button>
+    </div>
+    <div class="cart-items" id="cartItems">
+        <!-- Cart items will be loaded here -->
+    </div>
+    <div class="cart-footer">
+        <div class="cart-total">
+            <span>Total:</span>
+            <span>₹<span id="cartTotal">0</span></span>
+        </div>
+        <button class="btn btn-primary btn-full" id="checkoutBtn">Proceed to Checkout</button>
+    </div>
+</div>
+
+    <script src="main.js"></script>
+</body>
+</html>

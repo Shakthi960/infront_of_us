@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Course details and enrollment information">
+    <meta name="keywords" content="course details, programming, enrollment, online learning">
+    <meta name="author" content="Infrontofus Team">
+    <link rel="icon" href="loader.jpg">
+    <link rel="stylesheet" href="main.css">
+    <title>Course Details - Infrontofus</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <style>
+        /* Course Detail Page Styles */
+        .course-hero {
+            background: linear-gradient(135deg, #7D2AE8 0%, #9c4dff 100%);
+            color: white;
+            padding: 80px 0 60px;
+        }
+
+        .course-hero-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        .course-title {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+
+        .course-description {
+            font-size: 18px;
+            opacity: 0.9;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .course-meta-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .meta-item {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+
+        .meta-value {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .meta-label {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        .course-enrollment-card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 100px;
+        }
+
+        .course-price {
+            font-size: 36px;
+            font-weight: 700;
+            color: #7D2AE8;
+            margin-bottom: 10px;
+        }
+
+        .original-price {
+            font-size: 18px;
+            color: var(--text-light);
+            text-decoration: line-through;
+            margin-bottom: 20px;
+        }
+
+        .enroll-btn {
+            width: 100%;
+            padding: 16px;
+            background: #7D2AE8;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 15px;
+        }
+
+        .enroll-btn:hover {
+            background: #6a1fc9;
+            transform: translateY(-2px);
+        }
+
+        .includes-list {
+            margin: 25px 0;
+        }
+
+        .includes-list li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            color: var(--text);
+        }
+
+        .includes-list i {
+            color: #7D2AE8;
+        }
+
+        /* Course Content Section */
+        .course-content-section {
+            padding: 80px 0;
+            background: var(--gray);
+        }
+
+        .modules-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .module {
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 16px;
+            border: 1px solid var(--border-subtle);
+            overflow: hidden;
+        }
+
+        .module-header {
+            padding: 24px;
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .module-header:hover {
+            background: rgba(125, 42, 232, 0.05);
+        }
+
+        .module-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text);
+            margin: 0;
+            flex: 1;
+        }
+
+        .module-toggle {
+            font-size: 20px;
+            color: #7D2AE8;
+            transition: transform 0.3s ease;
+        }
+
+        .module.active .module-toggle {
+            transform: rotate(45deg);
+        }
+
+        .lessons-list {
+            padding: 0 24px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .module.active .lessons-list {
+            padding: 0 24px 24px;
+            max-height: 1000px;
+        }
+
+        .lesson {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .lesson:last-child {
+            border-bottom: none;
+        }
+
+        .lesson-icon {
+            width: 32px;
+            height: 32px;
+            background: rgba(125, 42, 232, 0.1);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #7D2AE8;
+        }
+
+        .lesson-info {
+            flex: 1;
+        }
+
+        .lesson-title {
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .lesson-duration {
+            font-size: 14px;
+            color: var(--text-light);
+        }
+
+        /* Instructor Section */
+        .instructor-section {
+            padding: 80px 0;
+        }
+
+        .instructor-card {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .instructor-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #7D2AE8;
+        }
+
+        .instructor-info h3 {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .instructor-role {
+            color: #7D2AE8;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .instructor-bio {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Requirements Section */
+        .requirements-section {
+            padding: 60px 0;
+            background: var(--gray);
+        }
+
+        .requirements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .requirement-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid var(--border-subtle);
+        }
+
+        .requirement-card i {
+            font-size: 36px;
+            color: #7D2AE8;
+            margin-bottom: 16px;
+        }
+
+        .requirement-card h4 {
+            margin-bottom: 12px;
+        }
+
+        /* Testimonials */
+        .testimonials-section {
+            padding: 80px 0;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid var(--border-subtle);
+            margin-bottom: 30px;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            padding: 60px 0;
+            background: var(--gray);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 968px) {
+            .course-hero-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .course-title {
+                font-size: 36px;
+            }
+
+            .instructor-card {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .course-meta-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .course-title {
+                font-size: 32px;
+            }
+
+            .module-header {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .course-meta-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .course-enrollment-card {
+                padding: 20px;
+            }
+
+            .course-price {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img class="nav-img" src="logo_black2.png" alt="logo">
+                <h1 class="nav-heading">Infront<span class="accent">of</span>Us</h1>
+            </div>
+
+            <ul class="nav-links" id="nav-links">
+    <li><a class="nav-link" href="index.html">Home</a></li>
+    <li><a class="nav-link" href="about.html">About</a></li>
+    <li><a class="nav-link" href="courses.html">Courses</a></li>
+    <li><a class="nav-link" href="blog.html">Blog</a></li>
+    <li><a class="nav-link" href="contact.html">Contact</a></li>
+    
+    <!-- Shopping Cart -->
+    <li class="cart-icon">
+        <a href="#" class="nav-link" id="cartToggle">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-count" id="cartCount">0</span>
+        </a>
+    </li>
+    
+    <!-- User Profile (Visible when logged in) -->
+    <li class="user-profile" id="userProfile" style="display: none;">
+        <div class="user-avatar" id="userAvatar">U</div>
+        <span class="user-name" id="userName">User</span>
+        <div class="user-dropdown">
+            <a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+            <a href="my-courses.html"><i class="fas fa-book"></i> My Courses</a>
+            <a href="profile.html"><i class="fas fa-user"></i> Profile</a>
+            <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </div>
+    </li>
+    
+    <!-- Login Button (Visible when not logged in) -->
+    <li>
+        <a class="nav-link login-btn" href="#" id="loginBtn">Login</a>
+    </li>
+</ul>
+
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Course Hero Section -->
+    <section class="course-hero">
+        <div class="container">
+            <div class="course-hero-content">
+                <div>
+                    <div class="breadcrumb">
+                        <a href="courses.html" style="color: rgba(255,255,255,0.8);">Courses</a> 
+                        <span style="color: rgba(255,255,255,0.6); margin: 0 10px;">/</span>
+                        <span style="color: white;" id="courseCategory">Programming</span>
+                    </div>
+                    <h1 class="course-title" id="courseTitle">Python Programming Masterclass</h1>
+                    <p class="course-description" id="courseDescription">
+                        Learn Python from scratch to advanced level. Build real-world applications, automate tasks, and master data structures and algorithms.
+                    </p>
+                    
+                    <div class="course-meta-grid">
+                        <div class="meta-item">
+                            <div class="meta-value" id="courseLevel">Beginner</div>
+                            <div class="meta-label">Level</div>
+                        </div>
+                        <div class="meta-item">
+                            <div class="meta-value" id="courseDuration">8 weeks</div>
+                            <div class="meta-label">Duration</div>
+                        </div>
+                        <div class="meta-item">
+                            <div class="meta-value" id="courseLessons">45</div>
+                            <div class="meta-label">Lessons</div>
+                        </div>
+                        <div class="meta-item">
+                            <div class="meta-value" id="courseProjects">8</div>
+                            <div class="meta-label">Projects</div>
+                        </div>
+                        <div class="meta-item">
+                            <div class="meta-value" id="courseRating">4.8</div>
+                            <div class="meta-label">Rating</div>
+                        </div>
+                        <div class="meta-item">
+                            <div class="meta-value" id="courseStudents">320+</div>
+                            <div class="meta-label">Students</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="course-enrollment-card">
+                    <div class="course-price">₹<span id="coursePrice">1999</span></div>
+                    <div class="original-price">₹<span id="originalPrice">2999</span></div>
+
+                    <button class="enroll-btn" id="enrollBtn">
+                        <i class="fas fa-shopping-cart"></i> Enroll Now
+                    </button>
+
+                    <button class="btn btn-outline btn-full" id="addToCartBtn" style="margin-top: 10px;">
+                        <i class="fas fa-cart-plus"></i> Add to Cart
+                    </button>
+
+                    <p style="text-align: center; color: var(--text-light); margin-bottom: 25px; margin-top: 10px;">
+                        <i class="fas fa-shield-alt"></i> 7-day money-back guarantee
+                    </p>
+
+                    
+                    <button class="enroll-btn" id="enrollBtn">
+                        <i class="fas fa-shopping-cart"></i> Enroll Now
+                    </button>
+                    
+                    <p style="text-align: center; color: var(--text-light); margin-bottom: 25px;">
+                        <i class="fas fa-shield-alt"></i> 7-day money-back guarantee
+                    </p>
+                    
+                    <div class="includes-list">
+                        <h4 style="margin-bottom: 15px;">This course includes:</h4>
+                        <ul id="courseIncludes">
+                            <li><i class="fas fa-play-circle"></i> 25 hours on-demand video</li>
+                            <li><i class="fas fa-file-alt"></i> 45 coding exercises</li>
+                            <li><i class="fas fa-download"></i> Downloadable resources</li>
+                            <li><i class="fas fa-infinity"></i> Full lifetime access</li>
+                            <li><i class="fas fa-mobile-alt"></i> Access on mobile and TV</li>
+                            <li><i class="fas fa-trophy"></i> Certificate of completion</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Course Content Section -->
+    <section class="course-content-section">
+        <div class="container">
+            <h2 class="section-title">Course Content</h2>
+            <p class="section-subtitle" id="courseModulesCount">8 modules • 45 lessons • 25 total hours</p>
+            
+            <div class="modules-container" id="courseModules">
+                <!-- Modules will be loaded dynamically based on course -->
+            </div>
+        </div>
+            </section>
+
+    <!-- Instructor Section -->
+    <section class="instructor-section">
+        <div class="container">
+            <h2 class="section-title">Course Instructor</h2>
+            <div class="instructor-card">
+                <img src="assets/images/instructor-python.jpg" alt="Instructor" class="instructor-avatar" id="instructorImage">
+                <div class="instructor-info">
+                    <h3 id="instructorName">Rajesh Kumar</h3>
+                    <div class="instructor-role" id="instructorRole">Senior Python Developer</div>
+                    <div class="instructor-bio" id="instructorBio">
+                        With over 8 years of experience in Python development and data science, Rajesh has worked with major tech companies 
+                        and trained thousands of students. He specializes in making complex programming concepts easy to understand for beginners.
+                    </div>
+                    <div class="instructor-stats" style="margin-top: 20px; display: flex; gap: 20px;">
+                        <div><strong>4.8</strong> Instructor Rating</div>
+                        <div><strong>5,240</strong> Students</div>
+                        <div><strong>12</strong> Courses</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Requirements Section -->
+    <section class="requirements-section">
+        <div class="container">
+            <h2 class="section-title">Requirements</h2>
+            <div class="requirements-grid">
+                <div class="requirement-card">
+                    <i class="fas fa-laptop"></i>
+                    <h4>Technical Requirements</h4>
+                    <p id="techRequirements">A computer with internet connection. No prior programming experience required.</p>
+                </div>
+                <div class="requirement-card">
+                    <i class="fas fa-book"></i>
+                    <h4>Prerequisites</h4>
+                    <p id="prerequisites">Basic computer literacy. Willingness to learn and practice coding regularly.</p>
+                </div>
+                <div class="requirement-card">
+                    <i class="fas fa-clock"></i>
+                    <h4>Time Commitment</h4>
+                    <p id="timeCommitment">5-7 hours per week recommended for optimal learning experience.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section">
+        <div class="container">
+            <h2 class="section-title">Student Testimonials</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "This course completely changed my career path. The hands-on projects and clear explanations made learning Python enjoyable and effective."
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="assets/images/student1.jpg" alt="Student" class="author-avatar">
+                        <div>
+                            <h4>Priya Sharma</h4>
+                            <span>Software Developer</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "The instructor's teaching style is fantastic! Complex topics are broken down into simple, understandable concepts. Highly recommended!"
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="assets/images/student2.jpg" alt="Student" class="author-avatar">
+                        <div>
+                            <h4>Arun Patel</h4>
+                            <span>Data Analyst</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>When does the course start and end?</h3>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>The course is self-paced - you can start immediately after enrollment and learn at your own schedule. There are no deadlines for completion.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>How long do I have access to the course?</h3>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>You get lifetime access to all course materials, including future updates. Learn at your own pace without any time pressure.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>What if I need help during the course?</h3>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We provide comprehensive support including Q&A forums, weekly live sessions, and email support to ensure you get help when needed.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Do I get a certificate after completion?</h3>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, you'll receive a digital certificate of completion that you can share on LinkedIn and include in your resume.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="f_logo-removebg-preview.png" alt="Infrontofus Logo">
+                        <h3>Infront<span class="accent">of</span>Us</h3>
+                    </div>
+                    <p>Empowering students through career guidance, workshops, expos, and online courses.</p>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/_infront_of_us_" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="https://youtube.com/channel/UCE1tN8OMn5rxFYnO62WUf1A" target="_blank"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="courses.html">Courses</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Programs</h4>
+                    <ul>
+                        <li><a href="blog.html">Workshops</a></li>
+                        <li><a href="blog.html">Expos</a></li>
+                        <li><a href="courses.html">Online Courses</a></li>
+                        <li><a href="courses.html">Career Counseling</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contact Info</h4>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> 2/64 A, M.Rasampalayam(Post), Paramathi Velur(Taluk), Namakkal-637207</li>
+                        <li><i class="fas fa-phone"></i> +91 7708658035</li>
+                        <li><i class="fas fa-envelope"></i> infrontofus143@gmail.com</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Infront of Us Pvt. Ltd. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Login to Your Account</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">Login</button>
+                <p class="form-footer">Don't have an account? <a href="#" id="showRegister">Register here</a></p>
+            </form>
+            
+            <form id="registerForm" style="display: none;">
+                <div class="form-group">
+                    <label for="reg-name">Full Name</label>
+                    <input type="text" id="reg-name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="reg-email">Email</label>
+                    <input type="email" id="reg-email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="reg-password">Password</label>
+                    <input type="password" id="reg-password" name="password" required>
+                </div>
+                <div class="form-group">
+                    <label for="reg-confirm">Confirm Password</label>
+                    <input type="password" id="reg-confirm" name="confirm" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">Register</button>
+                <p class="form-footer">Already have an account? <a href="#" id="showLogin">Login here</a></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Shopping Cart Modal -->
+<div class="cart-overlay" id="cartOverlay"></div>
+<div class="cart-modal" id="cartModal">
+    <div class="cart-header">
+        <h3>Your Cart</h3>
+        <button class="close-cart" id="closeCart">&times;</button>
+    </div>
+    <div class="cart-items" id="cartItems">
+        <!-- Cart items will be loaded here -->
+    </div>
+    <div class="cart-footer">
+        <div class="cart-total">
+            <span>Total:</span>
+            <span>₹<span id="cartTotal">0</span></span>
+        </div>
+        <button class="btn btn-primary btn-full" id="checkoutBtn">Proceed to Checkout</button>
+    </div>
+</div>
+
+    <script src="main.js"></script>
+<script>
+    let currentCourse = null;
+
+    function getCourseId() {
+        const params = new URLSearchParams(window.location.search);
+        return params.get('id'); // keep as string in case of GUID
+    }
+
+    async function loadCourseData() {
+        const courseId = getCourseId();
+        if (!courseId) {
+            window.location.href = 'courses.html';
+            return;
+        }
+
+        try {
+            const res = await fetch(`${API_BASE}/api/courses/${courseId}`);
+            if (!res.ok) throw new Error('Failed to load course');
+
+            const course = await res.json();
+            currentCourse = course;
+
+            // Hero text
+            document.getElementById('courseTitle').textContent = course.title;
+            document.getElementById('courseDescription').textContent = course.description;
+            document.getElementById('courseCategory').textContent = course.category || 'Programming';
+
+            // Meta
+            document.getElementById('courseLevel').textContent = course.level;
+            document.getElementById('courseDuration').textContent = course.duration;
+            document.getElementById('courseLessons').textContent = course.lessons;
+            document.getElementById('courseProjects').textContent = course.projects || 0;
+            document.getElementById('courseRating').textContent = course.rating || '4.8';
+            document.getElementById('courseStudents').textContent = (course.students || 0) + '+';
+
+            // Price
+            document.getElementById('coursePrice').textContent = course.price;
+            if (course.originalPrice) {
+                document.getElementById('originalPrice').textContent = course.originalPrice;
+            } else {
+                const orig = document.getElementById('originalPrice').parentElement;
+                if (orig) orig.style.display = 'none';
+            }
+
+            // Modules
+            loadCourseModules(course.modules || []);
+
+            const modulesCountText = `${(course.modules || []).length} modules • ${course.lessons} lessons • ${course.totalHours || 20} total hours`;
+            document.getElementById('courseModulesCount').textContent = modulesCountText;
+
+            // Instructor
+            if (course.instructor) {
+                document.getElementById('instructorName').textContent = course.instructor.name;
+                document.getElementById('instructorRole').textContent = course.instructor.role;
+                document.getElementById('instructorBio').textContent = course.instructor.bio;
+                document.getElementById('instructorImage').src = course.instructor.image;
+                document.getElementById('instructorImage').alt = course.instructor.name;
+            }
+
+            // Page title
+            document.title = `${course.title} - Infrontofus`;
+
+            // Enroll button
+            const enrollBtn = document.getElementById('enrollBtn');
+            if (enrollBtn) {
+                enrollBtn.addEventListener('click', handleEnroll);
+            }
+
+            // Add to cart button
+            const addToCartBtn = document.getElementById('addToCartBtn');
+            if (addToCartBtn) {
+                addToCartBtn.addEventListener('click', handleAddToCart);
+            }
+        } catch (err) {
+            console.error(err);
+            // Simple fallback if course not found
+            alert('Unable to load this course. Redirecting to courses page.');
+            window.location.href = 'courses.html';
+        }
+    }
+
+    function loadCourseModules(modules) {
+        const modulesContainer = document.getElementById('courseModules');
+        modulesContainer.innerHTML = '';
+
+        if (!modules || modules.length === 0) {
+            modulesContainer.innerHTML = '<p>No modules available yet. Content coming soon.</p>';
+            return;
+        }
+
+        modules.forEach((module) => {
+            const moduleElement = document.createElement('div');
+            moduleElement.className = 'module';
+            moduleElement.innerHTML = `
+                <div class="module-header">
+                    <h3 class="module-title">${module.title}</h3>
+                    <span class="module-toggle">+</span>
+                </div>
+                <div class="lessons-list">
+                    ${(module.lessons || []).map(lesson => `
+                        <div class="lesson">
+                            <div class="lesson-icon">
+                                <i class="fas fa-play-circle"></i>
+                            </div>
+                            <div class="lesson-info">
+                                <div class="lesson-title">${lesson.title}</div>
+                                <div class="lesson-duration">${lesson.duration || '20 min'}</div>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+            modulesContainer.appendChild(moduleElement);
+        });
+
+        // Expand/collapse
+        document.querySelectorAll('.module-header').forEach(header => {
+            header.addEventListener('click', function () {
+                const module = this.parentElement;
+                module.classList.toggle('active');
+            });
+        });
+    }
+
+    function handleAddToCart() {
+        if (!currentCourse) return;
+
+        CartService.addToCart({
+            id: currentCourse.id,
+            title: currentCourse.title,
+            price: currentCourse.price,
+            image: currentCourse.image,
+            instructor: currentCourse.instructor ? currentCourse.instructor.name : 'Instructor'
+        });
+    }
+
+    function handleEnroll() {
+        if (!currentCourse) return;
+
+        if (!AuthService.isLoggedIn()) {
+            const loginModal = document.getElementById('loginModal');
+            if (loginModal) loginModal.style.display = 'block';
+            return;
+        }
+
+        // Simple Razorpay integration (later you will replace with real order API)
+        const options = {
+            key: 'your_razorpay_key_id', // TODO: replace
+            amount: currentCourse.price * 100, // paise
+            currency: 'INR',
+            name: 'Infrontofus',
+            description: currentCourse.title,
+            image: 'logo_black2.png',
+            handler: function (response) {
+                alert('Payment successful! Course enrolled.');
+                window.location.href = `course-player.html?id=${currentCourse.id}`;
+            },
+            prefill: {
+                name: AuthService.getUser()?.name || 'Student',
+                email: AuthService.getUser()?.email || '',
+                contact: ''
+            },
+            notes: {
+                course_id: currentCourse.id
+            },
+            theme: {
+                color: '#7D2AE8'
+            }
+        };
+
+        if (typeof Razorpay !== 'undefined') {
+            const rzp = new Razorpay(options);
+            rzp.open();
+        } else {
+            alert('Payment gateway not loaded. Please refresh the page.');
+        }
+    }
+
+    function initFAQ() {
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', function () {
+                faqItems.forEach(otherItem => {
+                    if (otherItem !== item) otherItem.classList.remove('active');
+                });
+                item.classList.toggle('active');
+            });
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        // Auth + navbar + cart handled by main.js
+        loadCourseData();
+        initFAQ();
+    });
+
+    // Global delegated handler for any .add-to-cart buttons (if you add more later)
+    document.addEventListener('click', function (e) {
+        if (e.target.classList.contains('add-to-cart') || e.target.closest('.add-to-cart')) {
+            handleAddToCart();
+        }
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Checkout - Infrontofus</title>
+    <meta name="description" content="Secure checkout for Infrontofus online courses">
+    <link rel="icon" href="loader.jpg">
+
+    <!-- Global styles (same as other pages) -->
+    <link rel="stylesheet" href="main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Navbar (same structure as other pages) -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img class="nav-img" src="logo_black2.png" alt="logo">
+                <h1 class="nav-heading">Infront<span class="accent">of</span>Us</h1>
+            </div>
+
+            <ul class="nav-links" id="nav-links">
+                <li><a class="nav-link" href="index.html">Home</a></li>
+                <li><a class="nav-link" href="about.html">About</a></li>
+                <li><a class="nav-link" href="courses.html">Courses</a></li>
+                <li><a class="nav-link" href="blog.html">Blog</a></li>
+                <li><a class="nav-link" href="contact.html">Contact</a></li>
+                
+                <!-- Shopping Cart -->
+                <li class="cart-icon">
+                    <a href="#" class="nav-link" id="cartToggle">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </a>
+                </li>
+                
+                <!-- User Profile (Visible when logged in) -->
+                <li class="user-profile" id="userProfile" style="display: none;">
+                    <div class="user-avatar" id="userAvatar">U</div>
+                    <span class="user-name" id="userName">User</span>
+                    <div class="user-dropdown">
+                        <a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                        <a href="my-courses.html"><i class="fas fa-book"></i> My Courses</a>
+                        <a href="profile.html"><i class="fas fa-user"></i> Profile</a>
+                        <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </div>
+                </li>
+                
+                <!-- Login Button (Visible when not logged in) -->
+                <li>
+                    <a class="nav-link login-btn" href="#" id="loginBtn">Login</a>
+                </li>
+            </ul>
+
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Checkout</h1>
+            <p>Complete your purchase and start learning</p>
+        </div>
+    </section>
+
+    <!-- Checkout Section -->
+    <section class="checkout-section">
+        <div class="container">
+            <div class="checkout-grid">
+                <div class="checkout-form">
+                    <h2>Payment Details</h2>
+                    <p style="color: var(--text-light); margin-bottom: 20px;">
+                        You’ll be redirected to a secure Razorpay payment page.
+                    </p>
+                    <!-- If you want extra fields (GST, promo code, etc.) add here -->
+                </div>
+                <div class="order-summary">
+                    <h2>Order Summary</h2>
+                    <div id="checkoutItems">
+                        <!-- Cart items will be loaded here -->
+                    </div>
+                    <div class="order-total" style="margin-top: 15px;">
+                        <strong>Total: ₹<span id="orderTotal">0</span></strong>
+                    </div>
+                </div>
+            </div>
+
+            <button id="payNowBtn" class="btn btn-primary btn-full" style="margin-top: 30px;">
+                Pay Now
+            </button>
+        </div>
+    </section>
+
+    <!-- Footer (same as other pages) -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="f_logo-removebg-preview.png" alt="Infrontofus Logo">
+                        <h3>Infront<span class="accent">of</span>Us</h3>
+                    </div>
+                    <p>Empowering students through career guidance, workshops, expos, and online courses.</p>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/_infront_of_us_" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="https://youtube.com/channel/UCE1tN8OMn5rxFYnO62WUf1A" target="_blank"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="courses.html">Courses</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Programs</h4>
+                    <ul>
+                        <li><a href="blog.html">Workshops</a></li>
+                        <li><a href="blog.html">Expos</a></li>
+                        <li><a href="courses.html">Online Courses</a></li>
+                        <li><a href="courses.html">Career Counseling</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contact Info</h4>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> 2/64 A, M.Rasampalayam(Post), Paramathi Velur(Taluk), Namakkal-637207</li>
+                        <li><i class="fas fa-phone"></i> +91 7708658035</li>
+                        <li><i class="fas fa-envelope"></i> infrontofus143@gmail.com</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Infront of Us Pvt. Ltd. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal (same pattern as other pages) -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Login to Your Account</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">Login</button>
+                <p class="form-footer">Don't have an account? <a href="#" id="showRegister">Register here</a></p>
+            </form>
+            
+            <form id="registerForm" style="display: none;">
+                <div class="form-group">
+                    <label for="reg-name">Full Name</label>
+                    <input type="text" id="reg-name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="reg-email">Email</label>
+                    <input type="email" id="reg-email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="reg-password">Password</label>
+                    <input type="password" id="reg-password" name="password" required>
+                </div>
+                <div class="form-group">
+                    <label for="reg-confirm">Confirm Password</label>
+                    <input type="password" id="reg-confirm" name="confirm" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">Register</button>
+                <p class="form-footer">Already have an account? <a href="#" id="showLogin">Login here</a></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Cart Modal (same as other pages) -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-header">
+            <h3>Your Cart</h3>
+            <button class="close-cart" id="closeCart">&times;</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <!-- Cart items will be loaded here -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span>₹<span id="cartTotal">0</span></span>
+            </div>
+            <button class="btn btn-primary btn-full" id="checkoutBtn">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <!-- Razorpay & main JS -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script src="main.js"></script>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // 1) Show cart items in checkout summary
+        const cart = CartService.getCart();
+        const checkoutItems = document.getElementById('checkoutItems');
+        const orderTotal = document.getElementById('orderTotal');
+
+        if (cart.length === 0) {
+            checkoutItems.innerHTML = `
+                <p>Your cart is empty. <a href="courses.html">Browse courses</a></p>
+            `;
+        } else {
+            checkoutItems.innerHTML = cart.map(item => `
+                <div class="checkout-item">
+                    <div>${item.title}</div>
+                    <div>₹${item.price}</div>
+                </div>
+            `).join('');
+        }
+
+        orderTotal.textContent = CartService.getCartTotal();
+
+        // 2) Handle Pay Now button
+        const payBtn = document.getElementById('payNowBtn');
+        if (payBtn) {
+            payBtn.addEventListener('click', startPayment);
+        }
+
+        async function startPayment() {
+            if (!AuthService.isLoggedIn()) {
+                alert('Please login before making payment.');
+                window.location.href = 'login.html';
+                return;
+            }
+
+            const cartNow = CartService.getCart();
+            if (cartNow.length === 0) {
+                alert('Your cart is empty.');
+                return;
+            }
+
+            const courseIds = cartNow.map(c => c.id);
+            const token = AuthService.getToken();
+
+            try {
+                const res = await fetch('https://your-api.azurewebsites.net/api/payment/create-order', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + token
+                    },
+                    body: JSON.stringify({ courseIds })
+                });
+
+                if (!res.ok) {
+                    alert('Failed to create payment order. Please try again.');
+                    return;
+                }
+
+                const data = await res.json();
+                const { order } = data; // assuming backend returns { order: { id, amount, currency, ... } }
+
+                const user = AuthService.getUser() || { name: 'Student', email: '' };
+
+                const options = {
+                    key: 'YOUR_RAZORPAY_KEY_ID', // TODO: replace with your live/test key
+                    amount: order.amount,
+                    currency: order.currency,
+                    name: 'Infrontofus',
+                    description: 'Course Purchase',
+                    order_id: order.id,
+                    handler: async function (response) {
+                        const verifyRes = await fetch('https://your-api.azurewebsites.net/api/payment/verify', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Authorization': 'Bearer ' + token
+                            },
+                            body: JSON.stringify({
+                                razorpay_order_id: response.razorpay_order_id,
+                                razorpay_payment_id: response.razorpay_payment_id,
+                                razorpay_signature: response.razorpay_signature,
+                                courseIds
+                            })
+                        });
+
+                        if (verifyRes.ok) {
+                            CartService.clearCart();
+                            alert('Payment successful! Courses added to your account.');
+                            window.location.href = 'my-courses.html';
+                        } else {
+                            alert('Payment verification failed. Please contact support.');
+                        }
+                    },
+                    prefill: {
+                        name: user.name,
+                        email: user.email
+                    },
+                    theme: {
+                        color: '#7D2AE8'
+                    }
+                };
+
+                const rzp = new Razorpay(options);
+                rzp.open();
+            } catch (err) {
+                console.error(err);
+                alert('Something went wrong while processing payment.');
+            }
+        }
+    });
+    </script>
+</body>
+</html>
