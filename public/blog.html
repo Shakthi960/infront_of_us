@@ -14,13 +14,86 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+  ::root{
+    --accent:#7D2AE8; --bg:#ffffff; --muted:#666666; --card:#fbfbff;
+    --radius:12px; --text:#222;
+  }
+
+  /* Page base */
+  body{font-family:Inter,system-ui,Arial; margin:0; background:#f6f7fb; color:var(--text); -webkit-font-smoothing:antialiased;}
+  .container{max-width:1000px; margin:48px auto; padding:0 20px;}
+  .page-title{font-size:28px; font-weight:700; margin-bottom:12px;}
+  .page-sub{color:var(--muted); margin-bottom:28px;}
+  .stack{display:grid; gap:20px;}
+
+  /* Card */
+  .card{
+    background:var(--card);
+    border-radius:var(--radius);
+    padding:20px;
+    box-shadow:0 6px 20px rgba(18,18,24,0.04);
+    border:1px solid rgba(125,42,232,0.06);
+  }
+
+  /* Header stacked vertically (title, note, button) */
+  .card-header{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    align-items:flex-start;
+  }
+  .card-title{font-size:18px; font-weight:700;}
+  .cta-note{font-size:13px; color:var(--muted); margin:0;}
+
+  /* School link button */
+  .school-link{
+    color:var(--accent);
+    font-weight:600;
+    cursor:pointer;
+    background:none;
+    border:1px solid rgba(125,42,232,0.12);
+    padding:8px 12px;
+    border-radius:10px;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+  }
+  .school-link:focus{outline:2px solid rgba(125,42,232,0.12);}
+  .chev{transition:transform .25s ease;}
+
+  /* Details content */
+  .details{margin-top:16px; color:var(--muted); line-height:1.6; display:none;}
+  .details.active{display:block;}
+
+  /* Images grid common */
+  .images-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-top:14px;}
+  .images-grid img{width:100%; object-fit:cover; border-radius:8px; display:block;}
+
+/* Aspect ratios:
+   - Career images: landscape 16:9
+   - Expo images: portrait 9:16
+   We use aspect-ratio for modern browsers; fallback: set a max-height.
+*/
+  .images-grid.career img{aspect-ratio:16 / 9; height:auto;}
+  .images-grid.expo img{aspect-ratio:9 / 16; height:auto;}
+
+/* Responsive */
+  @media (max-width:1000px){
+    .images-grid{grid-template-columns:repeat(2,1fr);}
+  }
+  @media (max-width:480px){
+    .card{padding:16px;}
+    .images-grid{grid-template-columns:repeat(1,1fr);}
+  }
+</style>
 </head>
 <body>
     <!-- Navbar -->
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo">
-                <img class="nav-img" src="assets/images/mainlogo2.png" alt="logo">
+                <img class="nav-img" src="logo_black2.png" alt="logo">
                 <h1 class="nav-heading">Infront<span class="accent">of</span>Us</h1>
             </div>
 
@@ -49,202 +122,89 @@
         </div>
     </section>
 
-    <!-- Blog Content -->
-    <section class="blog-content">
-        <div class="container">
-            <div class="blog-grid">
-                <!-- Main Blog Posts -->
-                <div class="blog-posts">
-                    <!-- Workshop Report -->
-                    <article class="blog-post featured">
-                        <div class="post-image">
-                            <img src="assets/images/CG1.jpg" alt="Career Guidance Workshop">
-                        </div>
-                        <div class="post-content">
-                            <span class="post-category">Workshop Report</span>
-                            <h2>Career Guidance Workshop at NKMHSS</h2>
-                            <div class="post-meta">
-                                <span><i class="far fa-calendar"></i> October 14, 2024</span>
-                                <span><i class="far fa-user"></i> Infrontofus Team</span>
-                            </div>
-                            <p>We are thrilled to announce our workshop, in collaboration with Namakkal Kongu Matriculation Higher Secondary School, specifically designed for 12th standard students. This exciting event is scheduled to take place on October 14th, 2024.</p>
-                            <p>Our team, Infront Of Us, is eager to share our knowledge and expertise to guide these young minds in shaping their careers. This interactive session aims to provide valuable insights and guidance, empowering them to make informed decisions about their future.</p>
-                            <button class="btn btn-primary read-more" data-post="workshop">Read Full Report</button>
-                        </div>
-                    </article>
+    <main class="container">
+  <h1 class="page-title">Blog — Reports</h1>
+  <p class="page-sub">Two event reports from Namakkal Kongu Matriculation Higher Secondary School.</p>
 
-                    <!-- Science Expo Report -->
-                    <article class="blog-post featured">
-                        <div class="post-image">
-                            <img src="assets/images/ex1.jpg" alt="Science Expo">
-                        </div>
-                        <div class="post-content">
-                            <span class="post-category">Expo Report</span>
-                            <h2>Science Expo 2024 - A Grand Success</h2>
-                            <div class="post-meta">
-                                <span><i class="far fa-calendar"></i> October 15, 2024</span>
-                                <span><i class="far fa-user"></i> Founder & CEO</span>
-                            </div>
-                            <p>Hello followers! This is from the Founder & CEO of Infront of Us. I am thrilled to share that I have been invited as a judge for the science expo held on October 15, 2024, at Namakkal Kongu Matriculation Higher Secondary School.</p>
-                            <p>As a student, I spent 12 incredible years at this institution, participating in numerous expos and events at various colleges, schools, and institutions. These experiences not only broadened my knowledge but also helped me develop essential skills like communication, leadership, and time management.</p>
-                            <button class="btn btn-primary read-more" data-post="expo">Read Full Report</button>
-                        </div>
-                    </article>
+  <div class="stack">
 
-                    <!-- Regular Blog Posts -->
-                    <article class="blog-post">
-                        <div class="post-image">
-                            <img src="assets/images/blog1.jpg" alt="Career Planning">
-                        </div>
-                        <div class="post-content">
-                            <span class="post-category">Career Guidance</span>
-                            <h2>5 Essential Steps for Effective Career Planning</h2>
-                            <div class="post-meta">
-                                <span><i class="far fa-calendar"></i> November 5, 2024</span>
-                                <span><i class="far fa-user"></i> Career Expert</span>
-                            </div>
-                            <p>Discover the key steps to create a successful career plan that aligns with your strengths, interests, and market opportunities.</p>
-                            <a href="#" class="btn btn-outline">Read More</a>
-                        </div>
-                    </article>
+    <!-- Career Guidance -->
+    <article class="card" id="careerCard">
+      <div class="card-header">
+        <div class="card-title">Career Guidance</div>
+        <div class="cta-note">Event: Workshop for 12th standard students</div>
 
-                    <article class="blog-post">
-                        <div class="post-image">
-                            <img src="assets/images/blog2.jpg" alt="Skill Development">
-                        </div>
-                        <div class="post-content">
-                            <span class="post-category">Skill Development</span>
-                            <h2>Top Skills Employers Look for in 2024</h2>
-                            <div class="post-meta">
-                                <span><i class="far fa-calendar"></i> October 28, 2024</span>
-                                <span><i class="far fa-user"></i> HR Consultant</span>
-                            </div>
-                            <p>Learn about the most in-demand skills in today's job market and how to develop them to boost your career prospects.</p>
-                            <a href="#" class="btn btn-outline">Read More</a>
-                        </div>
-                    </article>
-                </div>
+        <button class="school-link" data-target="careerDetails" aria-expanded="false" aria-controls="careerDetails">
+          Namakkal Kongu Matriculation Higher Secondary School
+          <i class="fas fa-chevron-down chev" aria-hidden="true"></i>
+        </button>
+      </div>
 
-                <!-- Sidebar -->
-                <aside class="blog-sidebar">
-                    <div class="sidebar-widget">
-                        <h3>Categories</h3>
-                        <ul class="categories">
-                            <li><a href="#">Workshop Reports <span>12</span></a></li>
-                            <li><a href="#">Expo Updates <span>8</span></a></li>
-                            <li><a href="#">Career Guidance <span>15</span></a></li>
-                            <li><a href="#">Skill Development <span>10</span></a></li>
-                            <li><a href="#">Student Success <span>7</span></a></li>
-                        </ul>
-                    </div>
+      <div id="careerDetails" class="details" role="region" aria-hidden="true">
+        <p>
+          We are thrilled to announce our workshop, in collaboration with Namakkal Kongu Matriculation Higher Secondary School, specifically designed for 12th standard students. This exciting event is scheduled to take place on October 14th, 2024.
+        </p>
+        <p>
+          Our team, Infront Of Us, is eager to share our knowledge and expertise to guide these young minds in shaping their careers. This interactive session aims to provide valuable insights and guidance, empowering them to make informed decisions about their future.
+        </p>
+        <p>
+          We extend our heartfelt gratitude to the management and principal of Namakkal Kongu Matriculation Higher Secondary School for this wonderful opportunity. Your support and trust in our team are greatly appreciated.
+        </p>
+        <p>
+          We look forward to making a positive impact on the lives of these young individuals.
+        </p>
 
-                    <div class="sidebar-widget">
-                        <h3>Recent Posts</h3>
-                        <div class="recent-posts">
-                            <div class="recent-post">
-                                <img src="assets/images/blog3.jpg" alt="Recent Post">
-                                <div>
-                                    <h4><a href="#">How to Choose the Right Career Path</a></h4>
-                                    <span>Oct 20, 2024</span>
-                                </div>
-                            </div>
-                            <div class="recent-post">
-                                <img src="assets/images/blog4.jpg" alt="Recent Post">
-                                <div>
-                                    <h4><a href="#">The Importance of Soft Skills</a></h4>
-                                    <span>Oct 15, 2024</span>
-                                </div>
-                            </div>
-                            <div class="recent-post">
-                                <img src="assets/images/blog5.jpg" alt="Recent Post">
-                                <div>
-                                    <h4><a href="#">Digital Literacy for Students</a></h4>
-                                    <span>Oct 10, 2024</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="sidebar-widget">
-                        <h3>Subscribe</h3>
-                        <p>Get the latest updates on workshops and courses</p>
-                        <form class="subscribe-form">
-                            <input type="email" placeholder="Your email address" required>
-                            <button type="submit" class="btn btn-primary">Subscribe</button>
-                        </form>
-                    </div>
-                </aside>
-            </div>
+        <!-- career images (landscape 16:9) -->
+        <div class="images-grid career" aria-hidden="false">
+          <img src="CG1.jpg" alt="Career Guidance image 1">
+          <img src="CG2.jpg" alt="Career Guidance image 2">
+          <img src="CG3.jpg" alt="Career Guidance image 3">
+          <img src="CG4.jpg" alt="Career Guidance image 4">
         </div>
-    </section>
+      </div>
+    </article>
 
-    <!-- Full Report Modals -->
-    <div class="modal full-report-modal" id="workshopReport">
-        <div class="modal-content large">
-            <span class="close-modal">&times;</span>
-            <h2>Career Guidance Workshop at NKMHSS - Full Report</h2>
-            <div class="report-content">
-                <div class="report-images">
-                    <img src="assets/images/CG1.jpg" alt="Workshop Image 1">
-                    <img src="assets/images/CG2.jpg" alt="Workshop Image 2">
-                    <img src="assets/images/CG3.jpg" alt="Workshop Image 3">
-                    <img src="assets/images/CG4.jpg" alt="Workshop Image 4">
-                </div>
-                <div class="report-text">
-                    <p>We are thrilled to announce our workshop, in collaboration with Namakkal Kongu Matriculation Higher Secondary School, specifically designed for 12th standard students. This exciting event is scheduled to take place on October 14th, 2024.</p>
-                    
-                    <p>Our team, Infront Of Us, is eager to share our knowledge and expertise to guide these young minds in shaping their careers. This interactive session aims to provide valuable insights and guidance, empowering them to make informed decisions about their future.</p>
-                    
-                    <p>We extend our heartfelt gratitude to the management and principal of Namakkal Kongu Matriculation Higher Secondary School for this wonderful opportunity. Your support and trust in our team are greatly appreciated.</p>
-                    
-                    <p>We look forward to making a positive impact on the lives of these young individuals.</p>
-                    
-                    <h3>Workshop Highlights:</h3>
-                    <ul>
-                        <li>Interactive career assessment sessions</li>
-                        <li>One-on-one counseling with experts</li>
-                        <li>Industry trend analysis</li>
-                        <li>Skill gap identification</li>
-                        <li>Personalized career roadmap creation</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
+    <!-- Science Expo -->
+    <article class="card" id="expoCard">
+      <div class="card-header">
+        <div class="card-title">Science Expo</div>
+        <div class="cta-note">Event: Science Expo — Judge: Founder & CEO</div>
 
-    <div class="modal full-report-modal" id="expoReport">
-        <div class="modal-content large">
-            <span class="close-modal">&times;</span>
-            <h2>Science Expo 2024 - Full Report</h2>
-            <div class="report-content">
-                <div class="report-images">
-                    <img src="assets/images/ex1.jpg" alt="Expo Image 1">
-                    <img src="assets/images/ex2.jpg" alt="Expo Image 2">
-                    <img src="assets/images/ex3.jpg" alt="Expo Image 3">
-                    <img src="assets/images/ex4.jpg" alt="Expo Image 4">
-                    <img src="assets/images/ex5.jpg" alt="Expo Image 5">
-                </div>
-                <div class="report-text">
-                    <p>Hello followers! This is from the Founder & CEO of Infront of Us.</p>
-                    
-                    <p>I am thrilled to share that I have been invited as a judge for the science expo held on October 15, 2024, at Namakkal Kongu Matriculation Higher Secondary School. As a student, I spent 12 incredible years at this institution, participating in numerous expos and events at various colleges, schools, and institutions. These experiences not only broadened my knowledge but also helped me develop essential skills like communication, leadership, and time management.</p>
-                    
-                    <p>Today, I am overwhelmed with gratitude as I return to my roots, not as a participant, but as a judge. This is truly a dream come true moment.</p>
-                    
-                    <p>I extend my heartfelt gratitude to the management and Principal Mrs. Geetha Ma'am for bestowing this honor upon me. I believe this platform will enable me to give back to my community and inspire the next generation of innovators.</p>
-                    
-                    <h3>Expo Highlights:</h3>
-                    <ul>
-                        <li>150+ innovative student projects</li>
-                        <li>Interactive science demonstrations</li>
-                        <li>Guest lectures from industry experts</li>
-                        <li>Hands-on workshops</li>
-                        <li>Award ceremony for outstanding projects</li>
-                    </ul>
-                </div>
-            </div>
+        <button class="school-link" data-target="expoDetails" aria-expanded="false" aria-controls="expoDetails">
+          Namakkal Kongu Matriculation Higher Secondary School
+          <i class="fas fa-chevron-down chev" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      <div id="expoDetails" class="details" role="region" aria-hidden="true">
+        <p>
+          Hello followers! This is from the Founder & CEO of Infront of Us.
+        </p>
+
+        <p>
+          I am thrilled to share that I have been invited as a judge for the science expo held on October 15, 2024, at Namakkal Kongu Matriculation Higher Secondary School. As a student, I spent 12 incredible years at this institution, participating in numerous expos and events at various colleges, schools, and institutions. These experiences not only broadened my knowledge but also helped me develop essential skills like communication, leadership, and time management.
+        </p>
+
+        <p>
+          Today, I am overwhelmed with gratitude as I return to my roots, not as a participant, but as a judge. This is truly a dream come true moment.
+        </p>
+
+        <p>
+          I extend my heartfelt gratitude to the management and Principal Mrs. Geetha Ma'am for bestowing this honor upon me. I believe this platform will enable me to give back to my community and inspire the next generation of innovators.
+        </p>
+
+        <!-- expo images (portrait 9:16) -->
+        <div class="images-grid expo">
+          <img src="ex1.jpg" alt="Expo image 1">
+          <img src="ex2.jpg" alt="Expo image 2">
+          <img src="ex3.jpg" alt="Expo image 3">
+          <img src="ex4.jpg" alt="Expo image 4">
         </div>
-    </div>
+      </div>
+    </article>
+
+  </div>
+</main>
 
     <!-- Footer -->
     <footer class="footer">
@@ -252,7 +212,7 @@
             <div class="footer-grid">
                 <div class="footer-col">
                     <div class="footer-logo">
-                        <img src="assets/images/logo2.jpg" alt="Infrontofus Logo">
+                        <img src="f_logo-removebg-preview.png" alt="Infrontofus Logo">
                         <h3>Infront<span class="accent">of</span>Us</h3>
                     </div>
                     <p>Empowering students through career guidance, workshops, expos, and online courses.</p>
@@ -341,7 +301,24 @@
         </div>
     </div>
 
-    <script src="assets/js/blog.js"></script>
-    <script src="assets/js/main.js"></script>
+    <script>
+        // Toggle expand/collapse for school details
+  document.querySelectorAll('.school-link').forEach(btn=>{
+    btn.addEventListener('click', () => {
+      const targetId = btn.getAttribute('data-target');
+      const details = document.getElementById(targetId);
+      const icon = btn.querySelector('.chev');
+
+      const isActive = details.classList.toggle('active');
+      details.setAttribute('aria-hidden', !isActive);
+      btn.setAttribute('aria-expanded', isActive);
+      if(isActive) icon.style.transform = 'rotate(180deg)';
+      else icon.style.transform = 'rotate(0)';
+      // Smooth scroll into view when opening
+      if(isActive) details.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+    </script>
+    <script src="main.js"></script>
 </body>
 </html>

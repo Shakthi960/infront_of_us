@@ -763,3 +763,209 @@ section {
         width: 100%;
     }
 }
+
+/* Team Section */
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.team-member {
+    text-align: center;
+}
+
+.member-image {
+    width: 200px;
+    height: auto;
+    overflow: hidden;
+    margin: 0 auto 20px;
+}
+
+.member-image2 img {
+    width: 200px;
+    height: auto;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 5px solid var(--accent);
+}
+
+.team-member h3 {
+    margin-bottom: 5px;
+}
+
+.member-role {
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+/* Additional CSS for the new sliders */
+    .slider-section {
+        margin: 60px 0;
+    }
+
+    .slider-container {
+        position: relative;
+        overflow: hidden;
+        margin-top: 16px;
+        border-radius: 14px;
+        max-width: 1000px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .slider-track {
+        display: flex;
+        transition: transform 0.6s cubic-bezier(.2, .9, .2, 1);
+    }
+
+    .slider-slide {
+        min-width: 100%;
+        opacity: 0;
+        transition: opacity 0.4s ease;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .slider-slide.active {
+        opacity: 1;
+    }
+
+    /* Expo Images (9:16 Portrait) */
+    #expo-slider .slider-slide {
+        background: #f8f9fa;
+        padding: 20px;
+    }
+
+    #expo-slider .slider-slide img {
+        width: auto;
+        max-width: 100%;
+        height: 200px;
+        object-fit: contain;
+        border-radius: 14px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .slide-caption {
+        position: absolute;
+        bottom: 12px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(15, 23, 42, 0.7);
+        color: #ffffff;
+        padding: 6px 14px;
+        border-radius: 999px;
+        font-size: 13px;
+        backdrop-filter: blur(4px);
+        white-space: nowrap;
+    }
+
+    .slider-arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 22px;
+        background: rgba(255, 255, 255, 0.825);
+        color: #7D2AE8;
+        border: none;
+        cursor: pointer;
+        padding: 4px 10px;
+        border-radius: 999px;
+        z-index: 10;
+        transition: background 0.3s ease;
+    }
+
+    .slider-arrow:hover {
+        background: rgba(15, 23, 42, 0.16);
+    }
+
+    .slider-prev {
+        left: 10px;
+    }
+
+    .slider-next {
+        right: 10px;
+    }
+
+    .slider-dots {
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    .slider-dots button {
+        width: 9px;
+        height: 9px;
+        border-radius: 999px;
+        border: none;
+        margin: 0 3px;
+        background: rgba(15, 23, 42, 0.18);
+        cursor: pointer;
+        transition: background 0.3s ease;
+    }
+
+    .slider-dots button.active {
+        background: #7D2AE8;
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+        /* Workshop Images on Mobile */
+        #workshop-slider .slider-slide img {
+            height: 300px;
+        }
+
+        /* Expo Images on Mobile */
+        #expo-slider .slider-slide {
+            padding: 10px;
+        }
+
+        #expo-slider .slider-slide img {
+            height: 400px;
+            max-width: 95%;
+        }
+
+        .slider-arrow {
+            font-size: 18px;
+            padding: 3px 8px;
+        }
+
+        .slide-caption {
+            font-size: 12px;
+            padding: 4px 10px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        /* Workshop Images on Small Mobile */
+        #workshop-slider .slider-slide img {
+            height: 250px;
+        }
+
+        /* Expo Images on Small Mobile */
+        #expo-slider .slider-slide img {
+            height: 350px;
+        }
+
+        .slider-arrow {
+            font-size: 16px;
+            padding: 2px 6px;
+        }
+
+        .slider-prev {
+            left: 5px;
+        }
+
+        .slider-next {
+            right: 5px;
+        }
+    }
+
+    /* For very tall expo images on desktop */
+    @media (min-width: 1024px) {
+        #expo-slider .slider-slide img {
+            height: 550px;
+        }
+    }
